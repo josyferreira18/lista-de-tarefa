@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Madimi+One&display=swap"
+      rel="stylesheet"
+    />
+    <title>Lista de Tarefas</title>
+  </head>
+  <body>
+    <div>
+      <div class="text">
+        <h1>Lista de Tarefas</h1>
+      </div>
+      <div class="main">
+        <input type="text" id="taskInput" placeholder="Adicionar nova tarefa" />
+        <button onclick="addTask()">Adicionar</button>
+        <div>
+          <ul id="taskList"></ul>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function addTask() {
+        let taskInput = document.getElementById("taskInput");
+        let taskList = document.getElementById("taskList");
+
+        if (taskInput.value.trim() !== "") {
+          let li = document.createElement("li");
+          let span = document.createElement("span");
+          let deleteButton = document.createElement("button");
+          let updateButton = document.createElement("button");
+
+          span.textContent = taskInput.value;
+          deleteButton.textContent = "Apagar";
+          updateButton.textContent = "Atualizar";
+
+          deleteButton.onclick = function () {
+            taskList.removeChild(li);
+          };
+
+          updateButton.onclick = function () {
+            let newTask = prompt("Editar tarefa:", span.textContent);
+            if (newTask !== null && newTask.trim() !== "") {
+              span.textContent = newTask;
+            }
+          };
+
+          li.appendChild(span);
+          li.appendChild(deleteButton);
+          li.appendChild(updateButton);
+          taskList.appendChild(li);
+
+          taskInput.value = "";
+        } else {
+          alert("Por favor, insira uma tarefa válida!");
+        }
+      }
+    </script>
+  </body>
+</html>
